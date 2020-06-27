@@ -1,17 +1,17 @@
 @font-face {
     font-family: avenir-light;
-    src: url('fonts/Avenir-Light.ttf');
+    src: url('../fonts/Avenir-Light.ttf');
   }
 @font-face {
     font-family: avenir-black;
-    src: url('fonts/Avenir-Black.ttf');
+    src: url('../fonts/Avenir-Black.ttf');
 }
 
 body {
     margin:0px 0px 100px 0px;
     padding:20px 0px 0px 0px;
     color:#002700;
-    background:#fec4c9 url(images/space.gif);
+    background:#fec4c9;
     font-family: avenir-light, Arial, Helvetica, sans-serif;
 }
 
