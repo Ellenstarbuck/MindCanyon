@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import '../src/stylesheet.css'
 import csImage from '../images/charlieandsteve.jpg'
 import EpisodeCard from '../src/components/EpisodeCard'
 import LatestCard from '../src/components/LatestCard'
+import LatestBlog from '../src/components/LatestBlog'
 import axios from 'axios'
+
 
 const parseRSS = (array) => {
   const result = []
@@ -14,13 +16,13 @@ const parseRSS = (array) => {
     epStore.title = element.split('<title><![CDATA[')[1].split(']]></title>')[0]
     epStore.description = element.split('<description><![CDATA[')[1].split(']]></description>')[0].replace(/(<([^>]+)>)/ig, '').replace('&nbsp;', '')
     epStore.imageURL = element.split('<itunes:image href="')[1].split('"/>')[0]
-    if (element.includes('<itunes:episode>')) { 
-      epStore.episode = 'Episode ' + element.split('<itunes:episode>')[1].split('</itunes:episode>')[0] 
+    if (element.includes('<itunes:episode>')) {
+      epStore.episode = 'Episode ' + element.split('<itunes:episode>')[1].split('</itunes:episode>')[0]
     } else {
       epStore.episode = 'Bonus Episode'
     }
-    if (element.includes('<itunes:season>')) { 
-      epStore.season = 'Season ' + element.split('<itunes:season>')[1].split('</itunes:season>')[0] 
+    if (element.includes('<itunes:season>')) {
+      epStore.season = 'Season ' + element.split('<itunes:season>')[1].split('</itunes:season>')[0]
     } else {
       epStore.season = ''
     }
@@ -34,77 +36,101 @@ const parseRSS = (array) => {
   return result
 }
 
-class App extends React.Component {
 
-  state = {
-    episodes: []
-  }
 
-  async componentDidMount() {
-    try {
-      const res = await axios.get('https://anchor.fm/s/81210e4/podcast/rss')
-      const itemArray = res.data.split('<item>')
-      itemArray.shift()
-      this.setState({ episodes: parseRSS(itemArray) })
-    } catch (err) {
-      console.log(err)
+
+const App = () => {
+
+  const [episodes, setEpisodes] = useState(null)
+  const [blogs, setBlogs] = useState(null)
+
+
+  useEffect(() => {
+    const fetchEpisodes = async () => {
+      try {
+        const res = await axios.get('https://anchor.fm/s/81210e4/podcast/rss')
+        const itemArray = res.data.split('<item>')
+        itemArray.shift()
+        setEpisodes(parseRSS(itemArray))
+      } catch (err) {
+        console.log(err)
+      }
     }
-  }
+    fetchEpisodes()
+  }, [])
+  
 
-  render() {
-    if (!this.state.episodes) return null
-    return (
-      <>
-        <hr />
-        <div className="navBar">
-          <div className="navOptions">
-            <div className="headline1">Mind Canyon</div>
-            <div className="navItem">ABOUT</div>
-            <div className="navItem">CAST</div>
-            <div className="navItem">LISTEN</div>
-          </div>
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axios.get('api/blogs')
+        setBlogs(res.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchBlogs()
+  }, [])
+
+
+
+
+
+  if (!episodes) return null
+  if (!blogs) return null
+  // console.log(episodes)
+  console.log(blogs)
+  
+
+
+  return (
+    <>
+      <hr />
+      <div className="navBar">
+        <div className="navOptions">
+          <div className="headline1">Mind Canyon</div>
+          <div className="navItem">ABOUT</div>
+          <div className="navItem">CAST</div>
+          <div className="navItem">LISTEN</div>
         </div>
-        <hr />
+      </div>
+      <hr />
 
-        <div className="bodyOuterFrame">
-          <div className="bodyInnerFrame">
-            <div className="headline2">Latest Episode</div>
-            <div className="bubble">
+      <div className="bodyOuterFrame">
+        <div className="bodyInnerFrame">
+          <div className="headline2">Latest Episode</div>
+          <div className="bubble">
 
-              {this.state.episodes.slice(0, 1).map(episode => <LatestCard key={episode.id} {...episode} />)}
+            {episodes.slice(0, 1).map(episode => <LatestCard key={episode.id} {...episode} />)}
 
-            </div>
-            <div className="headline2">About</div>
-            <div className="bubble">
-              <div className="about">
-                <img className="aboutImage" src={csImage} />
-                <div className="aboutText">
-                  Mind Canyon is a mockumentary podcast starring the best UK improvisers. Nominated for Best Comedy and the Creativity Award at the British Podcast Awards 2020. Join hosts Steve Dawson (Mitchell & Webb, The Peter Serafinowicz Show) and Charlie Kemp (Man Down, Emmerdale) as they fill your Mind Canyon™. This ‘Radiolab’ style podcast explores stories such as “Finding The World Hide and Seek Champion”, “The Most Haunted Londis” and “When Space Pranks Go Wrong”. The show is improvised then edited and soundscaped for your listening pleasure.
-                </div>
+          </div>
+          <div className="headline2">About</div>
+          <div className="bubble">
+            <div className="about">
+              <img className="aboutImage" src={csImage} />
+              <div className="aboutText">
+                Mind Canyon is a mockumentary podcast starring the best UK improvisers. Nominated for Best Comedy and the Creativity Award at the British Podcast Awards 2020. Join hosts Steve Dawson (Mitchell & Webb, The Peter Serafinowicz Show) and Charlie Kemp (Man Down, Emmerdale) as they fill your Mind Canyon™. This ‘Radiolab’ style podcast explores stories such as “Finding The World Hide and Seek Champion”, “The Most Haunted Londis” and “When Space Pranks Go Wrong”. The show is improvised then edited and soundscaped for your listening pleasure.
               </div>
             </div>
-            <div className="headline2">Episodes</div>
-            <div className="episodes">
-              {this.state.episodes.slice(0, 3).map(episode => <EpisodeCard key={episode.id} {...episode} />)}
-            </div>
+          </div>
+          <div className="headline2">Episodes</div>
+          <div className="episodes">
+            {episodes.slice(1, 4).map(episode => <EpisodeCard key={episode.id} {...episode} />)}
+          </div>
 
-            <div className="headline2">News</div>
-            <div className="bubble">
-              <div className="news">
-                <h1 className="ql-align-center">Nominated For Two British Podcast Awards</h1>
-                <p>Quill is a free, <a href="https://github.com/quilljs/quill/">open source</a> WYSIWYG editor built for the modern web. With its <a href="https://quilljs.com/docs/modules/">modular architecture</a> and expressive <a href="https://quilljs.com/docs/api/">API</a>, it is completely customizable to fit any need.</p>
-                <iframe className="ql-video ql-align-center" src="https://player.vimeo.com/video/253905163" width="500" height="280" allowFullScreen></iframe>
-                <h2 className="ql-align-center">Getting Started is Easy</h2>
-              </div>
-            </div>
+          <div className="headline2">News</div>
+          <div className="bubble">
+            {/* {blogs[0].title} */}
+           {blogs.slice(0,1).map(blog => <LatestBlog key={blog._id} {...blog} />)}
+           
           </div>
         </div>
-      </>
-    )
-  }
+      </div>
+    </>
+  )
 }
+
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root')
-)
+  document.getElementById('root'))

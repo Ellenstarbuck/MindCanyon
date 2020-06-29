@@ -2,7 +2,6 @@ import React from 'react'
 import '../stylesheet.css'
 
 const LatestCard = ({ title, season, episode, description, imageURL, audioURL, audioType }) => {
-  console.log(title)
   return (
     <>
     <div className="leImage">

@@ -1,5 +1,5 @@
 const mongoose = require ('mongoose')
-const { dbURI } = require ('../config/environmental')
+const { dbURI } = require ('../config/environment')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
