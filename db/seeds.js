@@ -25,7 +25,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }, (er
           date: 'Wed Jun 03 2020 14:41:02 GMT+0100 (British Summer Time)',
           title: '10 Isolation Improv Games',
           summary: 'Here are some warmups your can practice on your own.',
-          image:  'https://ga-core.s3.amazonaws.com/production/uploads/program/default_image/8049/thumb_Improv-for-Success.jpg',
+          image:  'https://www.secondcity.com/wp-content/uploads/2019/03/TC_Improv_1440x823_001.png',
           body: '<h1>Solo Doors</h1><p>A\
           Solo exercise. Enter, as a character, through a door. Make the\
           environment clear (by means of the (kind of) door. In that\

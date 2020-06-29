@@ -194,6 +194,8 @@ hr {
     padding: 0px 0px 0px 0px;
     margin: 10px 10px 0px 10px;
     border: 6px solid #002700;
+    justify-content: center;
+    align-items: center;
   }
 
   .episodeTitle {
@@ -226,6 +228,104 @@ hr {
   }
  
   .news {
-      flex-direction: column;
-      padding: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .blog {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+  }
+
+  .blogMain {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px 0px 10px;
+  }
+
+  .blogMain p {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 5px 0px;
+
+  }
+
+  .blogMain h1 {
+    display: flex;
+    flex-grow: 1;
+    text-align: center;
+    font-size: x-large;
+    width: 100%;
+    padding: 0px 0px 5px 0px;
+    margin: 0px 0px 0px 0px;
+    letter-spacing: 1.25px;
+  }
+
+  .blogTitleBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 0px 10px 0px;
+  }
+
+  .blogArea {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px 0px 0px;
+  }
+
+  .blogBody {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 15px 0px 25px;
+  }
+
+  .blogImage {
+    display: flex;
+    flex: 0 0 100px;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    margin: 0px;
+    border-radius: 15px;
+    border: 0px solid #002700;
+  }
+
+  .blogTitle {
+    display: flex;
+    font-style: avenir-black, Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    padding: 10px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    max-width: fit-content;
+    border-bottom: 1px solid #002700;
+  }
+
+  .blogSummary {
+    font-style: avenir-black, Arial, Helvetica, sans-serif;
+  }
+
+  .blogDate {
+    display: flex;
+    font-size: 7px;
+    background-color: #002700;
+    color: white;
+    padding:0px 4px 0px 4px;
+    width: fit-content;
+  }
+
+
+  .subscribeButtons {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+  }
+
+  .subscribeButtons img {
+    padding: 30px 10px 10px 10px;
+    margin: 0px 0px 0px 0px;
   }
