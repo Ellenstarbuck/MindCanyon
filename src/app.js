@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import '../src/stylesheet.css'
+import axios from 'axios'
+
 import csImage from '../images/charlieandsteve.jpg'
 import EpisodeCard from '../src/components/EpisodeCard'
 import LatestCard from '../src/components/LatestCard'
 import BlogCard from '../src/components/BlogCard'
 import appleLogo from '../images/US_UK_Apple_Podcasts_Listen_Badge_RGB.svg'
 import googleLogo from '../images/EN_Google_Podcasts_Badge.svg'
-import spotifyLogo from '../images/spotify-podcast-badge-wht-grn-165x40.svg'
+import spotifyLogo from '../images/spotify-podcast-badge-blk-grn-165x40.svg'
 import RSSLogo from '../images/rss.svg'
-import axios from 'axios'
 
 
 const parseRSS = (array) => {
@@ -107,8 +108,8 @@ const App = () => {
 
           <div className="subscribeButtons">
             <a href="https://podcasts.apple.com/us/podcast/mind-canyon"><img src={appleLogo} height='40px' /></a>
-            <a href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy84MTIxMGU0L3BvZGNhc3QvcnNz"><img src={googleLogo} height='40px' /></a>
             <a href="https://open.spotify.com/show/1B2fguMn2DZkCeFKDkBloB"><img src={spotifyLogo} height='40px' /></a>
+            <a href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy84MTIxMGU0L3BvZGNhc3QvcnNz"><img src={googleLogo} height='40px' /></a>
             <a href="https://anchor.fm/s/81210e4/podcast/rss"><img src={RSSLogo} height='40px' /></a>
           </div>
 
