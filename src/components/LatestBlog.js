@@ -1,19 +1,20 @@
 import React from 'react'
 import '../stylesheet.css'
+// import DOMPurify from 'dompurify'
 
-const LatestBlog = ( _id, date, title, summary, image, body) => {
+const LatestBlog = ( { _id, date, title, summary, image, body } ) => {
+  console.log(image)
   return (
     <>
-    <h1>{title} ::</h1>
-
-
-
-
-      {/* <div className="news">
+      <div className="news">
+        <img src={image} />
         <h1 className="ql-align-center">{title}</h1>
         <h2 className="ql-align-center">{summary}</h2>
-        {body}
-      </div> */}
+        
+        <div dangerouslySetInnerHTML={{ __html: body }} />
+
+        
+      </div>
     </>
   )
 }

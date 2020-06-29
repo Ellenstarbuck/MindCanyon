@@ -78,8 +78,6 @@ const App = () => {
 
   if (!episodes) return null
   if (!blogs) return null
-  // console.log(episodes)
-  console.log(blogs)
   
 
 
@@ -120,8 +118,8 @@ const App = () => {
 
           <div className="headline2">News</div>
           <div className="bubble">
-            {/* {blogs[0].title} */}
-           {blogs.slice(0,1).map(blog => <LatestBlog key={blog._id} {...blog} />)}
+
+            {blogs.map(blog => <LatestBlog key={blog._id} {...blog} />)}
            
           </div>
         </div>
